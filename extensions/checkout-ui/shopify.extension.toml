@@ -1,0 +1,10 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "RoundUp Donation"
+handle = "roundup-donation-checkout"
+type = "ui_extension"
+
+[[extensions.targeting]]
+module = "./src/Checkout.jsx"
+target = "purchase.checkout.block.render"
