@@ -31,7 +31,7 @@
 
 ## App URL
 
-Extensions connect to: https://6140c2be-f843-4d5d-a409-49581b075d8d-00-1yn93pk7zmmz0.picard.replit.dev
+Extensions connect to: https://roundup-for-charity.replit.app
 
 ## Syncing Updates
 
