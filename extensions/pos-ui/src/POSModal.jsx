@@ -11,7 +11,7 @@ import {
 } from "@shopify/ui-extensions-react/point-of-sale";
 import { useState, useEffect } from "react";
 
-const APP_URL = "http://localhost:5000";
+const APP_URL = "https://6140c2be-f843-4d5d-a409-49581b075d8d-00-1yn93pk7zmmz0.picard.replit.dev";
 
 const POSModal = () => {
   const api = useApi();
