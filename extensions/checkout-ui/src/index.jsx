@@ -12,7 +12,7 @@ import {
 } from "@shopify/ui-extensions-react/checkout";
 import { useState, useEffect } from "react";
 
-const APP_URL = "https://roundup-for-charity.replit.app";
+const APP_URL = "https://charity-checkout.replit.app";
 
 export default reactExtension("purchase.checkout.block.render", () => (
   <RoundUpDonation />
