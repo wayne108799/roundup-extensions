@@ -1,10 +1,10 @@
 name = "RoundUp for Charity"
 client_id = "78ee946529e7879acd99bd2d1709f913"
-application_url = "https://roundup-for-charity.replit.app"
+application_url = "https://charity-checkout.replit.app"
 embedded = true
 
 [auth]
-redirect_urls = ["https://roundup-for-charity.replit.app/api/auth/callback"]
+redirect_urls = ["https://charity-checkout.replit.app/api/auth/callback"]
 
 [webhooks]
 api_version = "2025-01"
