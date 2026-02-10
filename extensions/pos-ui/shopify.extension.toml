@@ -1,9 +1,9 @@
-api_version = "2025-01"
+api_version = "2025-07"
 
 [[extensions]]
 name = "RoundUp POS Donation"
 handle = "roundup-donation-pos"
-type = "pos_ui_extension"
+type = "ui_extension"
 
 [[extensions.targeting]]
 module = "./src/index.jsx"
