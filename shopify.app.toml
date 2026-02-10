@@ -1,0 +1,12 @@
+name = "RoundUp for Charity"
+client_id = "78ee946529e7879acd99bd2d1709f913"
+application_url = "http://localhost:5000"
+
+[auth]
+redirect_urls = ["http://localhost:5000/api/auth/callback"]
+
+[webhooks]
+api_version = "2025-01"
+
+[access_scopes]
+scopes = "read_products,write_products"
