@@ -6,5 +6,5 @@ handle = "roundup-donation-checkout"
 type = "ui_extension"
 
 [[extensions.targeting]]
-module = "./src/Checkout.jsx"
+module = "./src/index.jsx"
 target = "purchase.checkout.block.render"
