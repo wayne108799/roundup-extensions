@@ -7,6 +7,9 @@
   },
   "dependencies": {
     "@shopify/cli": "latest",
-    "@shopify/app": "latest"
+    "@shopify/app": "latest",
+    "react": "^18.0.0",
+    "@shopify/ui-extensions": "2025.4.x",
+    "@shopify/ui-extensions-react": "2025.4.x"
   }
 }
