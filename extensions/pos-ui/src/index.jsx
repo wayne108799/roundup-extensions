@@ -11,7 +11,7 @@ import {
 } from "@shopify/ui-extensions-react/point-of-sale";
 import { useState, useEffect } from "react";
 
-const APP_URL = "https://roundup-for-charity.replit.app";
+const APP_URL = "https://charity-checkout.replit.app";
 
 const POSModal = () => {
   const api = useApi();
