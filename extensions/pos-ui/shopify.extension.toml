@@ -6,5 +6,5 @@ handle = "roundup-donation-pos"
 type = "pos_ui_extension"
 
 [[extensions.targeting]]
-module = "./src/POSModal.jsx"
+module = "./src/index.jsx"
 target = "pos.purchase.post.action.render"
