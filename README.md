@@ -31,7 +31,7 @@
 
 ## App URL
 
-Extensions connect to: https://roundup-for-charity.replit.app
+Extensions connect to: https://charity-checkout.replit.app
 
 ## Syncing Updates
 
