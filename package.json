@@ -1,0 +1,12 @@
+{
+  "name": "roundup-extensions",
+  "private": true,
+  "scripts": {
+    "deploy": "shopify app deploy",
+    "dev": "shopify app dev"
+  },
+  "dependencies": {
+    "@shopify/cli": "latest",
+    "@shopify/app": "latest"
+  }
+}
