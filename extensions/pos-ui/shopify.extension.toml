@@ -1,0 +1,10 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "RoundUp POS Donation"
+handle = "roundup-donation-pos"
+type = "pos_ui_extension"
+
+[[extensions.targeting]]
+module = "./src/POSModal.jsx"
+target = "pos.purchase.post.action.render"
