@@ -13,6 +13,18 @@
   var donationInProgress = false;
   var variantReady = !!donationVariantId;
 
+  function setButtonsEnabled(enabled) {
+    buttons.forEach(function(btn) {
+      btn.disabled = !enabled;
+      btn.style.opacity = enabled ? '1' : '0.5';
+      btn.style.cursor = enabled ? 'pointer' : 'not-allowed';
+    });
+  }
+
+  if (!variantReady) {
+    setButtonsEnabled(false);
+  }
+
   if (!donationVariantId && appUrl && shopDomain) {
     fetch(appUrl + '/api/ext/donation-product?shop=' + encodeURIComponent(shopDomain))
       .then(function(res) { return res.json(); })
@@ -20,6 +32,7 @@
         if (data.variantId) {
           donationVariantId = String(data.variantId);
           variantReady = true;
+          setButtonsEnabled(true);
           updateRoundUpButton();
         }
       })
@@ -172,7 +185,7 @@
     });
 
     btn.addEventListener('click', function() {
-      if (donationInProgress) return;
+      if (donationInProgress || !variantReady) return;
       var action = btn.getAttribute('data-action');
       var amount = parseFloat(btn.getAttribute('data-amount') || '0');
       var wasSelected = btn.classList.contains('roundup-selected');
