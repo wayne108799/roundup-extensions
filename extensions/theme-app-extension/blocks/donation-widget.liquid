@@ -1,0 +1,147 @@
+{% comment %}
+  RoundUp Donation Widget - Theme App Extension Block
+  Works on all Shopify plans. Add to cart page via theme editor.
+{% endcomment %}
+
+<div id="roundup-donation-widget"
+  data-app-url="{{ block.settings.app_url }}"
+  data-prompt-message="{{ block.settings.prompt_message }}"
+  data-thank-you-message="{{ block.settings.thank_you_message }}"
+  data-enable-round-up="{{ block.settings.enable_round_up }}"
+  data-enable-fixed="{{ block.settings.enable_fixed_amounts }}"
+  data-fixed-amounts="{{ block.settings.fixed_amounts }}"
+  data-charity-name="{{ block.settings.charity_name }}"
+  style="margin: 16px 0;"
+>
+  <div class="roundup-container" style="
+    border: 1px solid var(--color-border, #e5e5e5);
+    border-radius: 8px;
+    padding: 16px;
+    background: var(--color-background, #ffffff);
+  ">
+    <div class="roundup-header" style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      <span class="roundup-title" style="font-weight: 600; font-size: 16px;">
+        {{ block.settings.prompt_message | default: "Round up for charity?" }}
+      </span>
+    </div>
+
+    {% if block.settings.charity_name != blank %}
+      <p class="roundup-charity" style="font-size: 14px; color: var(--color-foreground-secondary, #666); margin: 0 0 12px 0;">
+        Supporting {{ block.settings.charity_name }}
+      </p>
+    {% endif %}
+
+    <div class="roundup-buttons" style="display: flex; flex-wrap: wrap; gap: 8px;">
+      {% if block.settings.enable_round_up %}
+        <button type="button"
+          class="roundup-btn roundup-btn-roundup"
+          data-action="round_up"
+          style="
+            padding: 8px 16px;
+            border: 1px solid var(--color-border, #e5e5e5);
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.15s, border-color 0.15s;
+          "
+        >
+          Round Up
+        </button>
+      {% endif %}
+
+      {% if block.settings.enable_fixed_amounts %}
+        {% assign amounts = block.settings.fixed_amounts | split: "," %}
+        {% for amount in amounts %}
+          {% assign trimmed = amount | strip %}
+          {% if trimmed != blank %}
+            <button type="button"
+              class="roundup-btn roundup-btn-fixed"
+              data-action="fixed"
+              data-amount="{{ trimmed }}"
+              style="
+                padding: 8px 16px;
+                border: 1px solid var(--color-border, #e5e5e5);
+                border-radius: 6px;
+                background: transparent;
+                cursor: pointer;
+                font-size: 14px;
+                transition: background 0.15s, border-color 0.15s;
+              "
+            >
+              +${{ trimmed }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <div class="roundup-thanks" style="display: none; padding: 12px; background: #ecfdf5; border-radius: 6px; margin-top: 12px;">
+      <p style="margin: 0; color: #065f46; font-weight: 500;">
+        {{ block.settings.thank_you_message | default: "Thank you for your donation!" }}
+      </p>
+      <p class="roundup-thanks-detail" style="margin: 4px 0 0 0; color: #065f46; font-size: 14px;"></p>
+    </div>
+  </div>
+</div>
+
+<script src="{{ 'roundup-widget.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "RoundUp Donation",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "app_url",
+      "label": "App URL",
+      "info": "Your RoundUp app URL (e.g. https://your-app.replit.app)"
+    },
+    {
+      "type": "text",
+      "id": "prompt_message",
+      "label": "Prompt Message",
+      "default": "Round up for charity?"
+    },
+    {
+      "type": "text",
+      "id": "thank_you_message",
+      "label": "Thank You Message",
+      "default": "Thank you for your generous donation!"
+    },
+    {
+      "type": "text",
+      "id": "charity_name",
+      "label": "Charity Name",
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_round_up",
+      "label": "Enable Round Up option",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_fixed_amounts",
+      "label": "Enable Fixed Amount options",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "fixed_amounts",
+      "label": "Fixed Amounts (comma separated)",
+      "default": "1, 2, 5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "RoundUp Donation"
+    }
+  ]
+}
+{% endschema %}
