@@ -11,6 +11,22 @@
   var donationVariantId = widget.getAttribute('data-donation-variant-id') || '';
   var shopDomain = (window.Shopify && window.Shopify.shop) ? window.Shopify.shop : '';
   var donationInProgress = false;
+  var variantReady = !!donationVariantId;
+
+  if (!donationVariantId && appUrl && shopDomain) {
+    fetch(appUrl + '/api/ext/donation-product?shop=' + encodeURIComponent(shopDomain))
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.variantId) {
+          donationVariantId = String(data.variantId);
+          variantReady = true;
+          updateRoundUpButton();
+        }
+      })
+      .catch(function(err) {
+        console.warn('RoundUp: Could not fetch donation product', err);
+      });
+  }
 
   function getCart() {
     return fetch('/cart.js')
