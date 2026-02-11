@@ -18,14 +18,18 @@
    This will ask you to log in to your Shopify Partner account.
 
 4. After deploying:
-   - **Online Checkout**: Go to Shopify Admin > Settings > Checkout > Customize,
+   - **Online Store (All Plans)**: Go to Shopify Admin > Online Store > Themes > Customize.
+     Navigate to the Cart page, click "Add block", and select "RoundUp Donation".
+     Enter your app URL in the block settings: https://charity-checkout.replit.app
+   - **Online Checkout (Plus only)**: Go to Shopify Admin > Settings > Checkout > Customize,
      then add the "RoundUp Donation" block to your checkout layout.
    - **POS**: Go to Shopify Admin > Point of Sale > Settings,
      then add the "RoundUp POS Donation" tile to your layout.
 
 ## What's Included
 
-- `extensions/checkout-ui/` - Online checkout donation widget
+- `extensions/theme-app-extension/` - Theme donation widget (works on ALL Shopify plans)
+- `extensions/checkout-ui/` - Checkout donation widget (Shopify Plus only)
 - `extensions/pos-ui/` - POS terminal donation prompt
 - `shopify.app.toml` - App configuration (pre-filled with your app URL)
 
