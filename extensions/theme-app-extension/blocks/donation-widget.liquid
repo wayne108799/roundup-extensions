@@ -1,6 +1,7 @@
 {% comment %}
   RoundUp Donation Widget - Theme App Extension Block
   Works on all Shopify plans. Add to cart page via theme editor.
+  Uses a donation product line item to add the donation amount to the cart.
 {% endcomment %}
 
 <div id="roundup-donation-widget"
@@ -11,6 +12,7 @@
   data-enable-fixed="{{ block.settings.enable_fixed_amounts }}"
   data-fixed-amounts="{{ block.settings.fixed_amounts }}"
   data-charity-name="{{ block.settings.charity_name }}"
+  data-donation-variant-id="{{ block.settings.donation_variant_id }}"
   style="margin: 16px 0;"
 >
   <div class="roundup-container" style="
@@ -99,7 +101,14 @@
       "type": "text",
       "id": "app_url",
       "label": "App URL",
-      "info": "Your RoundUp app URL (e.g. https://your-app.replit.app)"
+      "info": "Your RoundUp app URL (e.g. https://your-app.replit.app)",
+      "default": "https://charity-checkout.replit.app"
+    },
+    {
+      "type": "text",
+      "id": "donation_variant_id",
+      "label": "Donation Product Variant ID",
+      "info": "Create a $1.00 product called 'Charity Donation' in Shopify. Enter the variant ID here. Find it in the product URL: admin/products/XXXXX/variants/YYYYYYY - enter the YYYYYYY number."
     },
     {
       "type": "text",
