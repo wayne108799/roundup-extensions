@@ -48,7 +48,7 @@
       return setCartAttributes(amount, type);
     }
 
-    var quantity = Math.round(amount * 100) / 100;
+    var quantity = Math.round(amount * 100);
 
     return removePreviousDonation().then(function() {
       return fetch('/cart/add.js', {
@@ -57,7 +57,7 @@
         body: JSON.stringify({
           items: [{
             id: parseInt(donationVariantId),
-            quantity: Math.ceil(quantity),
+            quantity: quantity,
             properties: {
               '_donation': 'true',
               '_donation_type': type,
