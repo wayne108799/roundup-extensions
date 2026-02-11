@@ -1,0 +1,6 @@
+api_version = "2025-07"
+type = "theme_app_extension"
+
+[extensions]
+name = "RoundUp Donation Widget"
+handle = "roundup-donation-widget"
