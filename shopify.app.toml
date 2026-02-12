@@ -1,10 +1,10 @@
 name = "RoundUp for Charity"
 client_id = "78ee946529e7879acd99bd2d1709f913"
-application_url = "https://91027c41-17a6-4b6a-aee6-833f5c3ab87b-00-hk4209lwvmsk.picard.replit.dev"
+application_url = "https://6140c2be-f843-4d5d-a409-49581b075d8d-00-1yn93pk7zmmz0.picard.replit.dev"
 embedded = true
 
 [auth]
-redirect_urls = ["https://91027c41-17a6-4b6a-aee6-833f5c3ab87b-00-hk4209lwvmsk.picard.replit.dev/api/auth/callback"]
+redirect_urls = ["https://6140c2be-f843-4d5d-a409-49581b075d8d-00-1yn93pk7zmmz0.picard.replit.dev/api/auth/callback"]
 
 [webhooks]
 api_version = "2025-01"
