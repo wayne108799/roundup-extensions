@@ -34,6 +34,8 @@
           variantReady = true;
           setButtonsEnabled(true);
           updateRoundUpButton();
+        } else if (data.error) {
+          console.warn('RoundUp: Donation product not available -', data.error, data.message);
         }
       })
       .catch(function(err) {
@@ -137,13 +139,19 @@
 
     getCartTotal().then(function(total) {
       if (total <= 0) {
-        roundUpBtn.style.display = 'none';
+        roundUpBtn.textContent = 'Round Up +$1.00';
+        roundUpBtn.setAttribute('data-amount', '1.00');
+        roundUpBtn.style.display = '';
         return;
       }
       var roundUp = Math.ceil(total) - total;
       if (roundUp === 0) roundUp = 1;
       roundUpBtn.textContent = 'Round Up +$' + roundUp.toFixed(2);
       roundUpBtn.setAttribute('data-amount', roundUp.toFixed(2));
+      roundUpBtn.style.display = '';
+    }).catch(function() {
+      roundUpBtn.textContent = 'Round Up +$1.00';
+      roundUpBtn.setAttribute('data-amount', '1.00');
       roundUpBtn.style.display = '';
     });
   }
