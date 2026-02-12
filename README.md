@@ -20,7 +20,7 @@
 4. After deploying:
    - **Online Store (All Plans)**: Go to Shopify Admin > Online Store > Themes > Customize.
      Navigate to the Cart page, click "Add block", and select "RoundUp Donation".
-     Enter your app URL in the block settings: https://7bdc6d7d-5f8a-4a9b-895d-2ac77276fbc9-00-3glorqpf5rgbk.picard.replit.dev
+     Enter your app URL in the block settings: https://ef06b77e-5fc7-4fb9-ad3e-75874815b0d7-00-qcrxypslt259.picard.replit.dev
    - **Online Checkout (Plus only)**: Go to Shopify Admin > Settings > Checkout > Customize,
      then add the "RoundUp Donation" block to your checkout layout.
    - **POS**: Go to Shopify Admin > Point of Sale > Settings,
@@ -35,7 +35,7 @@
 
 ## App URL
 
-Extensions connect to: https://7bdc6d7d-5f8a-4a9b-895d-2ac77276fbc9-00-3glorqpf5rgbk.picard.replit.dev
+Extensions connect to: https://ef06b77e-5fc7-4fb9-ad3e-75874815b0d7-00-qcrxypslt259.picard.replit.dev
 
 ## Syncing Updates
 
