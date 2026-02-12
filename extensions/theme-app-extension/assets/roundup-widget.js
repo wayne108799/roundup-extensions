@@ -6,28 +6,12 @@
   var thanksDiv = widget.querySelector('.roundup-thanks');
   var thanksDetail = widget.querySelector('.roundup-thanks-detail');
   var buttonsContainer = widget.querySelector('.roundup-buttons');
-  var appUrl = (widget.getAttribute('data-app-url') || '').replace(/\/+$/, '');
+  var appUrl = widget.getAttribute('data-app-url') || '';
   var charityName = widget.getAttribute('data-charity-name') || 'charity';
   var donationVariantId = widget.getAttribute('data-donation-variant-id') || '';
+  var shopDomain = (window.Shopify && window.Shopify.shop) ? window.Shopify.shop : '';
   var donationInProgress = false;
   var variantReady = !!donationVariantId;
-
-  var shopDomain = '';
-  if (window.Shopify && window.Shopify.shop) {
-    shopDomain = window.Shopify.shop;
-  } else {
-    var metaTag = document.querySelector('meta[name="shopify-shop"]');
-    if (metaTag) shopDomain = metaTag.getAttribute('content') || '';
-    if (!shopDomain) {
-      var scripts = document.querySelectorAll('script[src*=".myshopify.com"]');
-      for (var i = 0; i < scripts.length; i++) {
-        var m = scripts[i].src.match(/([a-z0-9-]+\.myshopify\.com)/);
-        if (m) { shopDomain = m[1]; break; }
-      }
-    }
-  }
-
-  console.log('[RoundUp] Init:', { appUrl: appUrl, shopDomain: shopDomain, variantFromSettings: donationVariantId, variantReady: variantReady });
 
   function setButtonsEnabled(enabled) {
     buttons.forEach(function(btn) {
@@ -42,29 +26,21 @@
   }
 
   if (!donationVariantId && appUrl && shopDomain) {
-    var fetchUrl = appUrl + '/api/ext/donation-product?shop=' + encodeURIComponent(shopDomain);
-    console.log('[RoundUp] Fetching variant from:', fetchUrl);
-    fetch(fetchUrl)
-      .then(function(res) {
-        console.log('[RoundUp] Variant fetch status:', res.status);
-        return res.json();
-      })
+    fetch(appUrl + '/api/ext/donation-product?shop=' + encodeURIComponent(shopDomain))
+      .then(function(res) { return res.json(); })
       .then(function(data) {
-        console.log('[RoundUp] Variant fetch response:', data);
         if (data.variantId) {
           donationVariantId = String(data.variantId);
           variantReady = true;
           setButtonsEnabled(true);
           updateRoundUpButton();
         } else if (data.error) {
-          console.warn('[RoundUp] Donation product not available -', data.error, data.message);
+          console.warn('RoundUp: Donation product not available -', data.error, data.message);
         }
       })
       .catch(function(err) {
-        console.warn('[RoundUp] Could not fetch donation product', err);
+        console.warn('RoundUp: Could not fetch donation product', err);
       });
-  } else if (!donationVariantId) {
-    console.warn('[RoundUp] Cannot fetch variant - missing appUrl or shopDomain', { appUrl: appUrl, shopDomain: shopDomain });
   }
 
   function getCart() {
@@ -194,7 +170,7 @@
         shopDomain: shopDomain
       })
     }).catch(function(err) {
-      console.warn('[RoundUp] Could not record donation', err);
+      console.warn('RoundUp: Could not record donation', err);
     });
   }
 
@@ -217,10 +193,7 @@
     });
 
     btn.addEventListener('click', function() {
-      if (donationInProgress || !variantReady) {
-        console.log('[RoundUp] Click blocked:', { donationInProgress: donationInProgress, variantReady: variantReady });
-        return;
-      }
+      if (donationInProgress || !variantReady) return;
       var action = btn.getAttribute('data-action');
       var amount = parseFloat(btn.getAttribute('data-amount') || '0');
       var wasSelected = btn.classList.contains('roundup-selected');
@@ -266,7 +239,7 @@
           location.reload();
         });
       }).catch(function(err) {
-        console.error('[RoundUp] Failed to add donation', err);
+        console.error('RoundUp: Failed to add donation', err);
         donationInProgress = false;
         btn.textContent = originalText;
         btn.classList.remove('roundup-selected');
