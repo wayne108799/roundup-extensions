@@ -121,7 +121,17 @@
             }
           }]
         })
-      }).then(function(res) { return res.json(); });
+      }).then(function(res) {
+        console.log('[RoundUp] cart/add.js status:', res.status);
+        return res.json().then(function(data) {
+          if (data.status === 422 || data.description || data.message) {
+            console.error('[RoundUp] Cart add error:', JSON.stringify(data));
+          } else {
+            console.log('[RoundUp] Cart add success, items:', data.items ? data.items.length : 'unknown');
+          }
+          return data;
+        });
+      });
     }).then(function() {
       return setCartAttributes(amount, type);
     });
