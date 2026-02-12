@@ -124,11 +124,12 @@
       }).then(function(res) {
         console.log('[RoundUp] cart/add.js status:', res.status);
         return res.json().then(function(data) {
-          if (data.status === 422 || data.description || data.message) {
-            console.error('[RoundUp] Cart add error:', JSON.stringify(data));
-          } else {
-            console.log('[RoundUp] Cart add success, items:', data.items ? data.items.length : 'unknown');
+          if (res.status >= 400 || data.status === 422 || data.description) {
+            var errMsg = data.description || data.message || JSON.stringify(data);
+            console.error('[RoundUp] Cart add error:', errMsg);
+            throw new Error('Cart error: ' + errMsg);
           }
+          console.log('[RoundUp] Cart add success, items:', data.items ? data.items.length : 'unknown');
           return data;
         });
       });
@@ -282,6 +283,17 @@
         btn.classList.remove('roundup-selected');
         btn.style.background = 'transparent';
         btn.style.color = 'inherit';
+        if (thanksDetail && thanksDiv) {
+          thanksDetail.textContent = 'Sorry, could not add donation. Please try again.';
+          thanksDiv.style.display = 'block';
+        }
+        if (appUrl && shopDomain) {
+          fetch(appUrl + '/api/ext/log-error', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ shop: shopDomain, error: err.message, context: 'cart_add' })
+          }).catch(function() {});
+        }
       });
     });
   });
